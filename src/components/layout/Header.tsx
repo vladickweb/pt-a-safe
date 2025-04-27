@@ -11,7 +11,7 @@ import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
 import { ThemeToggle } from "@/components/ui/ThemeToggle/ThemeToggle";
 
-export function Header() {
+export const Header = () => {
   const { data: session } = useSession();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
@@ -77,4 +77,4 @@ export function Header() {
       />
     </header>
   );
-}
+};

@@ -7,7 +7,15 @@ import { Table } from "@/components/ui/Table/Table";
 import { UserTableRow } from "@/components/users/UserTableRow";
 import { UserSkeletonRow } from "@/components/users/UserSkeletonRow";
 import { PageSizeSelector } from "@/components/ui/PageSizeSelector/PageSizeSelector";
-import { useMemo, useState, useEffect } from "react";
+import { useMemo, useState, useEffect, useCallback } from "react";
+
+const COLUMNS = [
+  { key: "name", label: "Name" },
+  { key: "email", label: "Email" },
+  { key: "company", label: "Company" },
+  { key: "status", label: "Status" },
+  { key: "lastLogin", label: "Last Login" },
+];
 
 export default function UsersPage() {
   const [page, setPage] = useState(1);
@@ -23,25 +31,17 @@ export default function UsersPage() {
     }
   }, [data?.total]);
 
-  const handlePageSizeChange = (newPageSize: number) => {
-    setPageSize(newPageSize);
-    setPage(1);
-  };
+  const handlePageSizeChange = useCallback(
+    (newPageSize: number) => {
+      setPageSize(newPageSize);
+      setPage(1);
+    },
+    [setPageSize, setPage],
+  );
 
   const totalPages = useMemo(
     () => Math.ceil(total / pageSize),
     [total, pageSize],
-  );
-
-  const columns = useMemo(
-    () => [
-      { key: "name", label: "Name" },
-      { key: "email", label: "Email" },
-      { key: "company", label: "Company" },
-      { key: "status", label: "Status" },
-      { key: "lastLogin", label: "Last Login" },
-    ],
-    [],
   );
 
   return (
@@ -58,7 +58,7 @@ export default function UsersPage() {
           </div>
         </div>
 
-        <Table columns={columns}>
+        <Table columns={COLUMNS}>
           {isLoading
             ? Array.from({ length: pageSize }).map((_, index) => (
                 <UserSkeletonRow key={index} />
