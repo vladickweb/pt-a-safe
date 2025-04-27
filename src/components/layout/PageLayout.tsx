@@ -3,7 +3,7 @@
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
-import { LoadingSpinner } from "../ui/LoadingSpinner";
+import { LoadingSpinner } from "../ui/LoadingSpinner/LoadingSpinner";
 import { Header } from "./Header";
 
 interface PageLayoutProps {

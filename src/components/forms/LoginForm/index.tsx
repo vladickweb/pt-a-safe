@@ -2,7 +2,7 @@
 
 import { Form, Formik, Field, ErrorMessage } from "formik";
 import { loginSchema } from "./schema";
-import { Button } from "@/components/ui/Button";
+import { Button } from "@/components/ui/Button/Button";
 
 interface LoginFormProps {
   onSubmit: (values: { email: string; password: string }) => Promise<void>;

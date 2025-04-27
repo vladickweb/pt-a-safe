@@ -1,7 +1,7 @@
 "use client";
 
 import { useTheme } from "@/contexts/ThemeContext";
-import { Button } from "./ui/Button";
+import { Button } from "../Button/Button";
 
 export function ThemeToggle() {
   const { isDarkMode, toggleTheme } = useTheme();

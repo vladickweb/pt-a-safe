@@ -17,8 +17,8 @@ const preview: Preview = {
       disable: false,
       toolbar: true,
       list: [
-        { name: "Light", class: "light", color: "#ffffff", default: true },
-        { name: "Dark", class: "dark", color: "#000000" },
+        { name: "Light", class: "light", color: "#f5f5f5", default: true },
+        { name: "Dark", class: "dark", color: "#1e1e1e" },
       ],
     },
   },
