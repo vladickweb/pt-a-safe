@@ -10,7 +10,7 @@ export default function DashboardPage() {
   const { data, isLoading } = useDashboardData();
 
   return (
-    <PageLayout title="Dashboard">
+    <PageLayout>
       <div className="p-4 space-y-4">
         <div className="grid gap-4 md:grid-cols-3">
           {isLoading ? (
@@ -49,16 +49,20 @@ export default function DashboardPage() {
             </>
           ) : (
             <>
-              <ChartCard
-                title="Sales Trend"
-                type="line"
-                data={data?.salesData ?? { labels: [], datasets: [] }}
-              />
-              <ChartCard
-                title="Monthly Revenue"
-                type="bar"
-                data={data?.revenueData ?? { labels: [], datasets: [] }}
-              />
+              <div className="overflow-hidden">
+                <ChartCard
+                  title="Sales Trend"
+                  type="line"
+                  data={data?.salesData ?? { labels: [], datasets: [] }}
+                />
+              </div>
+              <div className="overflow-hidden">
+                <ChartCard
+                  title="Monthly Revenue"
+                  type="bar"
+                  data={data?.revenueData ?? { labels: [], datasets: [] }}
+                />
+              </div>
             </>
           )}
         </div>
