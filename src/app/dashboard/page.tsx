@@ -1,47 +1,56 @@
 "use client";
 
-import { signOut, useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
-import { useEffect } from "react";
-import { LoadingSpinner } from "../components/LoadingSpinner";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/Card";
+import { PageLayout } from "../../components/layout/PageLayout";
 
 export default function DashboardPage() {
-  const { data: session, status } = useSession();
-  const router = useRouter();
-
-  useEffect(() => {
-    if (status === "unauthenticated") {
-      router.replace("/auth/login");
-    }
-  }, [status, router]);
-
-  if (status === "loading" || status === "unauthenticated") {
-    return <LoadingSpinner />;
-  }
-
-  const handleLogout = async () => {
-    await signOut({ redirect: true, callbackUrl: "/auth/login" });
-  };
-
   return (
-    <div className="min-h-screen p-8">
-      <div className="max-w-4xl mx-auto">
-        <div className="flex justify-between items-center mb-8">
-          <h1 className="text-2xl font-bold">Dashboard</h1>
-          <button
-            onClick={handleLogout}
-            className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition-colors"
-          >
-            Logout
-          </button>
-        </div>
-        <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow">
-          <h2 className="text-xl font-semibold mb-4">
-            Welcome, {session?.user?.email}
-          </h2>
-          <p>This is your protected dashboard page.</p>
+    <PageLayout title="Dashboard">
+      <div className="grid gap-6">
+        <Card>
+          <CardHeader>
+            <CardTitle>Welcome to your dashboard</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse
+              magnam, nulla, similique, ut itaque cumque placeat est reiciendis
+              molestias ab aspernatur velit alias molestiae. Tenetur maxime
+              assumenda necessitatibus deserunt dicta.
+            </p>
+          </CardContent>
+        </Card>
+
+        <div className="grid gap-6 md:grid-cols-2">
+          <Card>
+            <CardHeader>
+              <CardTitle>Statistics</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p>
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+                Aliquam, veritatis! Ipsam voluptatem adipisci reiciendis placeat
+                dolore provident inventore, fuga tempora quidem magni, suscipit
+                pariatur tempore animi odio alias? Pariatur, laboriosam.
+              </p>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <CardTitle>more content...</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio,
+                maxime tempore, eveniet maiores vero enim quos eos veritatis
+                facilis quod fugiat soluta obcaecati, amet sint quibusdam est
+                nobis unde voluptates.
+              </p>
+            </CardContent>
+          </Card>
         </div>
       </div>
-    </div>
+    </PageLayout>
   );
 }

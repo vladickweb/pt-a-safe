@@ -2,6 +2,7 @@
 
 import { Form, Formik, Field, ErrorMessage } from "formik";
 import { loginSchema } from "./schema";
+import { Button } from "@/components/ui/Button";
 
 interface LoginFormProps {
   onSubmit: (values: { email: string; password: string }) => Promise<void>;
@@ -19,7 +20,7 @@ export const LoginForm = ({ onSubmit, externalError }: LoginFormProps) => {
       }}
     >
       {({ isSubmitting }) => (
-        <Form className="flex flex-col gap-4 p-8 rounded shadow-md">
+        <Form className="flex flex-col gap-4 p-8 rounded">
           {externalError && (
             <div className="text-red-500 text-sm mb-2">{externalError}</div>
           )}
@@ -54,13 +55,13 @@ export const LoginForm = ({ onSubmit, externalError }: LoginFormProps) => {
             />
           </div>
 
-          <button
+          <Button
             type="submit"
-            className="bg-blue-500 hover:bg-blue-600 text-white font-semibold p-2 rounded disabled:opacity-50"
             disabled={isSubmitting}
+            isLoading={isSubmitting}
           >
-            {isSubmitting ? "Logging in..." : "Login"}
-          </button>
+            Login
+          </Button>
         </Form>
       )}
     </Formik>
