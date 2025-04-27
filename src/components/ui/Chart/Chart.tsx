@@ -68,6 +68,8 @@ export function Chart({ type, title, data, className }: ChartProps) {
           position: "top" as const,
           labels: {
             color: colors.text,
+            boxWidth: 12,
+            padding: 10,
           },
         },
         title: {
@@ -87,6 +89,8 @@ export function Chart({ type, title, data, className }: ChartProps) {
           },
           ticks: {
             color: colors.text,
+            maxRotation: 45,
+            minRotation: 45,
           },
         },
         y: {
@@ -95,6 +99,7 @@ export function Chart({ type, title, data, className }: ChartProps) {
           },
           ticks: {
             color: colors.text,
+            maxTicksLimit: 5,
           },
         },
       },

@@ -11,22 +11,30 @@
   --color-secondary-light: #f5b14c;
   --color-secondary-dark: #915a00;
 
-  --color-background: #f5f5f5;
+  --color-background: #ffffff;
   --color-foreground: #1a1a1a;
+  --color-muted: #f5f5f5;
+  --color-muted-foreground: #666666;
 
-  --color-background-dark: #1e1e1e;
-  --color-foreground-dark: #e0e0e0;
+  --color-background-dark: #0a0a0a;
+  --color-foreground-dark: #ffffff;
+  --color-muted-dark: #1a1a1a;
+  --color-muted-foreground-dark: #a0a0a0;
 }
 
 
 :root {
 	--background: var(--color-background);
 	--foreground: var(--color-foreground);
+	--muted: var(--color-muted);
+	--muted-foreground: var(--color-muted-foreground);
 }
 
 .dark {
 	--background: var(--color-background-dark);
 	--foreground: var(--color-foreground-dark);
+	--muted: var(--color-muted-dark);
+	--muted-foreground: var(--color-muted-foreground-dark);
 }
 
 body {
@@ -38,9 +46,9 @@ body {
 .skeleton {
   background: linear-gradient(
     90deg,
-    var(--color-background) 25%,
-    var(--color-background-dark) 37%,
-    var(--color-background) 63%
+    var(--muted) 25%,
+    var(--muted-foreground) 37%,
+    var(--muted) 63%
   );
   background-size: 400% 100%;
   animation: skeleton-loading 1.4s ease infinite;

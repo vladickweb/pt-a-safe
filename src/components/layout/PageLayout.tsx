@@ -8,10 +8,9 @@ import { Header } from "./Header";
 
 interface PageLayoutProps {
   children: React.ReactNode;
-  title: string;
 }
 
-export function PageLayout({ children, title }: PageLayoutProps) {
+export function PageLayout({ children }: PageLayoutProps) {
   const { status } = useSession();
   const router = useRouter();
 
@@ -26,11 +25,13 @@ export function PageLayout({ children, title }: PageLayoutProps) {
   }
 
   return (
-    <div className="min-h-screen">
-      <Header title={title} />
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {children}
-      </main>
+    <div className="min-h-screen flex flex-col overflow-x-hidden">
+      <Header />
+      <div className="flex-1 w-full">
+        <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8">
+          <main className="w-full">{children}</main>
+        </div>
+      </div>
     </div>
   );
 }
