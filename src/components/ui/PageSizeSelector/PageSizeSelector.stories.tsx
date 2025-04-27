@@ -14,7 +14,7 @@ const meta: Meta<typeof PageSizeSelector> = {
       action: "setPageSize",
     },
     options: {
-      control: "array",
+      control: "object",
       defaultValue: [10, 20, 50, 100],
     },
   },
@@ -26,7 +26,7 @@ type Story = StoryObj<typeof PageSizeSelector>;
 export const Default: Story = {
   args: {
     pageSize: 10,
-    setPageSize: (size) => console.log("Page size changed to:", size),
+    setPageSize: () => true,
     options: [10, 20, 50, 100],
   },
 };
@@ -34,7 +34,7 @@ export const Default: Story = {
 export const CustomOptions: Story = {
   args: {
     pageSize: 5,
-    setPageSize: (size) => console.log("Page size changed to:", size),
+    setPageSize: () => true,
     options: [5, 15, 30, 60],
   },
 };

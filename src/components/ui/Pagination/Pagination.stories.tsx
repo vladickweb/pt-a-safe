@@ -31,7 +31,7 @@ export const Default: Story = {
   args: {
     page: 1,
     totalPages: 10,
-    setPage: (page) => console.log("Page changed to:", page),
+    setPage: () => true,
     isLoading: false,
   },
 };
@@ -40,7 +40,7 @@ export const MiddlePage: Story = {
   args: {
     page: 5,
     totalPages: 10,
-    setPage: (page) => console.log("Page changed to:", page),
+    setPage: () => true,
     isLoading: false,
   },
 };
@@ -49,7 +49,7 @@ export const LastPage: Story = {
   args: {
     page: 10,
     totalPages: 10,
-    setPage: (page) => console.log("Page changed to:", page),
+    setPage: () => true,
     isLoading: false,
   },
 };
@@ -58,7 +58,7 @@ export const Loading: Story = {
   args: {
     page: 1,
     totalPages: 10,
-    setPage: (page) => console.log("Page changed to:", page),
+    setPage: () => true,
     isLoading: true,
   },
-}; 
+};
