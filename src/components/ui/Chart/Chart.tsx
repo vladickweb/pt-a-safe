@@ -41,6 +41,7 @@ interface ChartProps {
     }[];
   };
   className?: string;
+  testId?: string;
 }
 
 const getChartColors = (isDark: boolean) => ({
@@ -49,7 +50,7 @@ const getChartColors = (isDark: boolean) => ({
   background: isDark ? "#1e1e1e" : "#ffffff",
 });
 
-export function Chart({ type, title, data, className }: ChartProps) {
+export function Chart({ type, title, data, className, testId }: ChartProps) {
   const { isDarkMode } = useTheme();
   const [mounted, setMounted] = useState(false);
 
@@ -65,7 +66,7 @@ export function Chart({ type, title, data, className }: ChartProps) {
       maintainAspectRatio: false,
       plugins: {
         legend: {
-          position: "top" as const,
+          position: "top",
           labels: {
             color: colors.text,
             boxWidth: 12,
@@ -128,7 +129,7 @@ export function Chart({ type, title, data, className }: ChartProps) {
   if (!mounted) return null;
 
   return (
-    <div className={cn("h-[300px] w-full", className)}>
+    <div className={cn("h-[300px] w-full", className)} data-testid={testId}>
       {type === "line" ? (
         <Line options={options} data={chartData} />
       ) : (

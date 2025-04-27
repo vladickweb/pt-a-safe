@@ -7,9 +7,32 @@ import { Button } from "@/components/ui/Button/Button";
 interface LoginFormProps {
   onSubmit: (values: { email: string; password: string }) => Promise<void>;
   externalError?: string;
+  testIds?: {
+    form?: string;
+    emailInput?: string;
+    emailError?: string;
+    passwordInput?: string;
+    passwordError?: string;
+    submitButton?: string;
+    externalError?: string;
+  };
 }
 
-export const LoginForm = ({ onSubmit, externalError }: LoginFormProps) => {
+export const LoginForm = ({
+  onSubmit,
+  externalError,
+  testIds = {},
+}: LoginFormProps) => {
+  const {
+    form = "login-form",
+    emailInput = "email-input",
+    emailError = "email-error",
+    passwordInput = "password-input",
+    passwordError = "password-error",
+    submitButton = "submit-button",
+    externalError: externalErrorTestId = "external-error",
+  } = testIds;
+
   return (
     <Formik
       initialValues={{ email: "", password: "" }}
@@ -20,9 +43,14 @@ export const LoginForm = ({ onSubmit, externalError }: LoginFormProps) => {
       }}
     >
       {({ isSubmitting }) => (
-        <Form className="flex flex-col gap-4 p-8 rounded">
+        <Form className="flex flex-col gap-4 p-8 rounded" data-testid={form}>
           {externalError && (
-            <div className="text-red-500 text-sm mb-2">{externalError}</div>
+            <div
+              className="text-red-500 text-sm mb-2"
+              data-testid={externalErrorTestId}
+            >
+              {externalError}
+            </div>
           )}
 
           <div className="flex flex-col">
@@ -32,11 +60,13 @@ export const LoginForm = ({ onSubmit, externalError }: LoginFormProps) => {
               type="email"
               placeholder="Email"
               className="border p-2 rounded"
+              data-testid={emailInput}
             />
             <ErrorMessage
               name="email"
               component="div"
               className="text-red-500 text-sm mt-1"
+              data-testid={emailError}
             />
           </div>
 
@@ -47,18 +77,20 @@ export const LoginForm = ({ onSubmit, externalError }: LoginFormProps) => {
               type="password"
               placeholder="Password"
               className="border p-2 rounded"
+              data-testid={passwordInput}
             />
             <ErrorMessage
               name="password"
               component="div"
               className="text-red-500 text-sm mt-1"
+              data-testid={passwordError}
             />
           </div>
 
           <Button
             type="submit"
-            disabled={isSubmitting}
             isLoading={isSubmitting}
+            data-testid={submitButton}
           >
             Login
           </Button>

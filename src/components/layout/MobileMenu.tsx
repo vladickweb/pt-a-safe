@@ -10,9 +10,10 @@ import { useCallback } from "react";
 interface MobileMenuProps {
   isOpen: boolean;
   onClose: () => void;
+  testId?: string;
 }
 
-export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
+export function MobileMenu({ isOpen, onClose, testId }: MobileMenuProps) {
   const pathname = usePathname();
 
   const handleSignOut = async () => {
@@ -30,21 +31,29 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 lg:hidden">
+    <div className="fixed inset-0 z-50 lg:hidden" data-testid={testId}>
       <div
         className="fixed inset-0 bg-white/80 dark:bg-black/80 backdrop-blur-sm"
         onClick={delayedClose}
+        data-testid={`${testId}-backdrop`}
       />
-      <div className="fixed inset-y-0 right-0 w-full max-w-sm bg-gray-100 dark:bg-gray-900 border-l border-gray-200 dark:border-gray-800">
+      <div
+        className="fixed inset-y-0 right-0 w-full max-w-sm bg-gray-100 dark:bg-gray-900 border-l border-gray-200 dark:border-gray-800"
+        data-testid={`${testId}-panel`}
+      >
         <div className="flex flex-col h-full">
           <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-800">
-            <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
+            <h2
+              className="text-lg font-semibold text-gray-900 dark:text-gray-100"
+              data-testid={`${testId}-title`}
+            >
               Menu
             </h2>
             <button
               onClick={onClose}
               className="p-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-800"
               aria-label="Close menu"
+              data-testid={`${testId}-close-button`}
             >
               <X className="h-5 w-5" />
             </button>
@@ -62,6 +71,7 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                       : "text-gray-700 dark:text-gray-300",
                   )}
                   onClick={delayedClose}
+                  data-testid={`${testId}-link-dashboard`}
                 >
                   Dashboard
                 </Link>
@@ -77,6 +87,7 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                       : "text-gray-700 dark:text-gray-300",
                   )}
                   onClick={delayedClose}
+                  data-testid={`${testId}-link-users`}
                 >
                   Users
                 </Link>
@@ -85,6 +96,7 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                 <button
                   onClick={handleSignOut}
                   className="w-full text-left px-4 py-2 rounded-md text-sm font-medium transition-colors hover:bg-gray-200 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300"
+                  data-testid={`${testId}-logout-button`}
                 >
                   Logout
                 </button>

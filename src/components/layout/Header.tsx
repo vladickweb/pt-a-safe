@@ -21,12 +21,17 @@ export const Header = () => {
   }, []);
 
   return (
-    <header className="border-b">
+    <header className="border-b" data-testid="header">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           <div className="flex items-center gap-8">
-            <h1 className="text-lg font-semibold">A-SAFE</h1>
-            <nav className="hidden lg:flex items-center gap-4">
+            <h1 className="text-lg font-semibold" data-testid="header-title">
+              A-SAFE
+            </h1>
+            <nav
+              className="hidden lg:flex items-center gap-4"
+              data-testid="desktop-nav"
+            >
               <Link
                 href="/dashboard"
                 className={cn(
@@ -55,15 +60,22 @@ export const Header = () => {
               onClick={() => setIsMobileMenuOpen(true)}
               className="lg:hidden p-2 rounded-md hover:bg-accent hover:text-accent-foreground"
               aria-label="Open menu"
+              data-testid="mobile-menu-button"
             >
               <Menu className="h-5 w-5" />
             </button>
-            <div className="hidden lg:flex items-center gap-4">
-              <span className="text-sm">{session?.user?.email}</span>
+            <div
+              className="hidden lg:flex items-center gap-4"
+              data-testid="user-info"
+            >
+              <span className="text-sm" data-testid="user-email">
+                {session?.user?.email}
+              </span>
               <Button
                 variant="outline"
                 onClick={handleLogout}
                 className="text-sm"
+                data-testid="logout-button"
               >
                 Logout
               </Button>
