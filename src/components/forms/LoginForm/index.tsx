@@ -7,9 +7,14 @@ import { Button } from "@/components/ui/Button/Button";
 interface LoginFormProps {
   onSubmit: (values: { email: string; password: string }) => Promise<void>;
   externalError?: string;
+  testId?: string;
 }
 
-export const LoginForm = ({ onSubmit, externalError }: LoginFormProps) => {
+export const LoginForm = ({
+  onSubmit,
+  externalError,
+  testId,
+}: LoginFormProps) => {
   return (
     <Formik
       initialValues={{ email: "", password: "" }}
@@ -20,9 +25,14 @@ export const LoginForm = ({ onSubmit, externalError }: LoginFormProps) => {
       }}
     >
       {({ isSubmitting }) => (
-        <Form className="flex flex-col gap-4 p-8 rounded">
+        <Form className="flex flex-col gap-4 p-8 rounded" data-testid={testId}>
           {externalError && (
-            <div className="text-red-500 text-sm mb-2">{externalError}</div>
+            <div
+              className="text-red-500 text-sm mb-2"
+              data-testid={`${testId}-external-error`}
+            >
+              {externalError}
+            </div>
           )}
 
           <div className="flex flex-col">
@@ -32,11 +42,13 @@ export const LoginForm = ({ onSubmit, externalError }: LoginFormProps) => {
               type="email"
               placeholder="Email"
               className="border p-2 rounded"
+              data-testid={`${testId}-email-input`}
             />
             <ErrorMessage
               name="email"
               component="div"
               className="text-red-500 text-sm mt-1"
+              data-testid={`${testId}-email-error`}
             />
           </div>
 
@@ -47,18 +59,20 @@ export const LoginForm = ({ onSubmit, externalError }: LoginFormProps) => {
               type="password"
               placeholder="Password"
               className="border p-2 rounded"
+              data-testid={`${testId}-password-input`}
             />
             <ErrorMessage
               name="password"
               component="div"
               className="text-red-500 text-sm mt-1"
+              data-testid={`${testId}-password-error`}
             />
           </div>
 
           <Button
             type="submit"
-            disabled={isSubmitting}
             isLoading={isSubmitting}
+            data-testid={`${testId}-submit-button`}
           >
             Login
           </Button>

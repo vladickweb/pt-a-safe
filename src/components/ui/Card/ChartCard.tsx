@@ -11,19 +11,21 @@ interface ChartCardProps {
     }[];
   };
   type: "line" | "bar";
+  testId?: string;
 }
 
-export function ChartCard({ title, data, type }: ChartCardProps) {
+export function ChartCard({ title, data, type, testId }: ChartCardProps) {
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle>{title}</CardTitle>
+    <Card data-testid={testId}>
+      <CardHeader testId={`${testId}-header`}>
+        <CardTitle testId={`${testId}-title`}>{title}</CardTitle>
       </CardHeader>
-      <CardContent>
+      <CardContent testId={`${testId}-content`}>
         <Chart
           type={type}
           title={title}
           data={data ?? { labels: [], datasets: [] }}
+          testId={`${testId}-chart`}
         />
       </CardContent>
     </Card>

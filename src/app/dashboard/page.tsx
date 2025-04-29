@@ -15,9 +15,9 @@ export default function DashboardPage() {
         <div className="grid gap-4 md:grid-cols-3">
           {isLoading ? (
             <>
-              <SkeletonCard />
-              <SkeletonCard />
-              <SkeletonCard />
+              <SkeletonCard testId="skeleton-card" />
+              <SkeletonCard testId="skeleton-card" />
+              <SkeletonCard testId="skeleton-card" />
             </>
           ) : (
             <>
@@ -26,16 +26,19 @@ export default function DashboardPage() {
                 value={data?.summary.totalSales.value.toLocaleString() ?? 0}
                 change={data?.summary.totalSales.change ?? 0}
                 isCurrency
+                testId="summary-card"
               />
               <SummaryCard
                 title="Active Clients"
                 value={data?.summary.activeClients.value.toLocaleString() ?? 0}
                 change={data?.summary.activeClients.change ?? 0}
+                testId="summary-card"
               />
               <SummaryCard
                 title="Conversion Rate"
                 value={`${data?.summary.conversionRate.value ?? 0}%`}
                 change={data?.summary.conversionRate.change ?? 0}
+                testId="summary-card"
               />
             </>
           )}
@@ -44,8 +47,8 @@ export default function DashboardPage() {
         <div className="grid gap-4 md:grid-cols-2">
           {isLoading ? (
             <>
-              <SkeletonCard />
-              <SkeletonCard />
+              <SkeletonCard testId="skeleton-card" />
+              <SkeletonCard testId="skeleton-card" />
             </>
           ) : (
             <>
@@ -54,6 +57,7 @@ export default function DashboardPage() {
                   title="Sales Trend"
                   type="line"
                   data={data?.salesData ?? { labels: [], datasets: [] }}
+                  testId="chart-card"
                 />
               </div>
               <div className="overflow-hidden">
@@ -61,6 +65,7 @@ export default function DashboardPage() {
                   title="Monthly Revenue"
                   type="bar"
                   data={data?.revenueData ?? { labels: [], datasets: [] }}
+                  testId="chart-card"
                 />
               </div>
             </>

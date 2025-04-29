@@ -58,7 +58,7 @@ export default function UsersPage() {
           </div>
         </div>
 
-        <Table columns={COLUMNS}>
+        <Table columns={COLUMNS} testId="users-table">
           {isLoading
             ? Array.from({ length: pageSize }).map((_, index) => (
                 <UserSkeletonRow key={index} />

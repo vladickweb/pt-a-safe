@@ -6,6 +6,7 @@ interface SummaryCardProps {
   value: number | string;
   change: number;
   isCurrency?: boolean;
+  testId?: string;
 }
 
 export function SummaryCard({
@@ -13,17 +14,21 @@ export function SummaryCard({
   value,
   change,
   isCurrency,
+  testId,
 }: SummaryCardProps) {
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle>{title}</CardTitle>
+    <Card testId={testId}>
+      <CardHeader testId={`${testId}-header`}>
+        <CardTitle testId={`${testId}-title`}>{title}</CardTitle>
       </CardHeader>
-      <CardContent>
-        <div className="text-2xl font-bold">
+      <CardContent testId={`${testId}-content`}>
+        <div className="text-2xl font-bold" data-testid={`${testId}-value`}>
           {isCurrency ? `$${value}` : value}
         </div>
-        <div className={`text-sm ${getChangeColor(change)}`}>
+        <div
+          className={`text-sm ${getChangeColor(change)}`}
+          data-testid={`${testId}-change`}
+        >
           {formatChangeValue(change)}
         </div>
       </CardContent>

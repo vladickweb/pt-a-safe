@@ -1,14 +1,18 @@
 import { Card, CardContent, CardHeader } from ".";
 import { Skeleton } from "../Skeleton/Skeleton";
 
-export function SkeletonCard() {
+interface SkeletonCardProps {
+  testId?: string;
+}
+
+export function SkeletonCard({ testId }: SkeletonCardProps) {
   return (
-    <Card>
-      <CardHeader>
-        <Skeleton className="h-6 w-3/4" />
+    <Card data-testid={testId}>
+      <CardHeader testId={`${testId}-header`}>
+        <Skeleton className="h-6 w-3/4" testId={`${testId}-header-skeleton`} />
       </CardHeader>
-      <CardContent>
-        <div className="space-y-2">
+      <CardContent testId={`${testId}-content`}>
+        <div className="space-y-2" data-testid={`${testId}-content-skeletons`}>
           <Skeleton className="h-8 w-1/2" />
           <Skeleton className="h-4 w-1/4" />
         </div>
