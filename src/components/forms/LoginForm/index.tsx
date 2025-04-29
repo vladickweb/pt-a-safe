@@ -3,7 +3,7 @@
 import { Form, Formik, Field, ErrorMessage } from "formik";
 import { loginSchema } from "./schema";
 import { Button } from "@/components/ui/Button/Button";
-
+import { useRouter } from "next/navigation";
 interface LoginFormProps {
   onSubmit: (values: { email: string; password: string }) => Promise<void>;
   externalError?: string;
@@ -15,6 +15,8 @@ export const LoginForm = ({
   externalError,
   testId,
 }: LoginFormProps) => {
+  const router = useRouter();
+
   return (
     <Formik
       initialValues={{ email: "", password: "" }}
@@ -69,13 +71,25 @@ export const LoginForm = ({
             />
           </div>
 
-          <Button
-            type="submit"
-            isLoading={isSubmitting}
-            data-testid={`${testId}-submit-button`}
-          >
-            Login
-          </Button>
+          <div className="flex flex-col gap-2">
+            <Button
+              type="submit"
+              isLoading={isSubmitting}
+              data-testid={`${testId}-submit-button`}
+            >
+              Login
+            </Button>
+
+            <Button
+              variant="ghost"
+              onClick={() => {
+                router.push("/");
+              }}
+              type="button"
+            >
+              Go back to home
+            </Button>
+          </div>
         </Form>
       )}
     </Formik>
