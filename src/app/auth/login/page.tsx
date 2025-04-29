@@ -3,12 +3,9 @@
 import { LoginForm } from "@/components/forms/LoginForm";
 import { useLogin } from "@/hooks/useLogin";
 
-interface LoginPageProps {
-  testId?: string;
-}
-
-export default function LoginPage({ testId = "login-page" }: LoginPageProps) {
+export default function LoginPage() {
   const { login, error } = useLogin();
+  const testId = "login-page";
 
   return (
     <div
