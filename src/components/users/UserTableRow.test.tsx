@@ -15,7 +15,7 @@ describe("UserTableRow", () => {
     name: "John Doe",
     email: "john@example.com",
     company: "Example Inc.",
-    status: "active",
+    status: "active" as const,
     lastLogin: "2024-04-01T12:00:00Z",
   };
 

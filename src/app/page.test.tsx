@@ -26,7 +26,7 @@ describe("Home", () => {
     render(<Home />);
     expect(screen.getByText("Hi there!")).toBeInTheDocument();
     expect(
-      screen.getByText("Welcome to my dashboard project"),
+      screen.getByText("Welcome to my A-SAFE project"),
     ).toBeInTheDocument();
     expect(screen.getByTestId("go-to-login-button")).toBeInTheDocument();
   });

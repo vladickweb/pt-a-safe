@@ -39,6 +39,7 @@ export const Header = () => {
                   "hover:text-primary",
                   pathname === "/dashboard" ? "text-primary" : "opacity-70",
                 )}
+                data-testid="nav-dashboard"
               >
                 Dashboard
               </Link>
@@ -49,13 +50,14 @@ export const Header = () => {
                   "hover:text-primary",
                   pathname === "/users" ? "text-primary" : "opacity-70",
                 )}
+                data-testid="nav-users"
               >
                 Users
               </Link>
             </nav>
           </div>
           <div className="flex items-center gap-2 lg:gap-4">
-            <ThemeToggle />
+            <ThemeToggle testId="theme-toggle" />
             <button
               onClick={() => setIsMobileMenuOpen(true)}
               className="lg:hidden p-2 rounded-md hover:bg-accent hover:text-accent-foreground"

@@ -9,44 +9,40 @@ import { LoginForm } from "./index";
 
 describe("LoginForm", () => {
   const mockOnSubmit = jest.fn();
-  const defaultTestIds = {
-    form: "login-form",
-    emailInput: "email-input",
-    emailError: "email-error",
-    passwordInput: "password-input",
-    passwordError: "password-error",
-    submitButton: "submit-button",
-    externalError: "external-error",
-  };
+  const testId = "login-form";
 
   beforeEach(() => {
     mockOnSubmit.mockClear();
   });
 
   it("renders the login form with all required fields", () => {
-    render(<LoginForm onSubmit={mockOnSubmit} />);
+    render(<LoginForm onSubmit={mockOnSubmit} testId={testId} />);
 
-    expect(screen.getByTestId(defaultTestIds.form)).toBeInTheDocument();
-    expect(screen.getByTestId(defaultTestIds.emailInput)).toBeInTheDocument();
-    expect(
-      screen.getByTestId(defaultTestIds.passwordInput),
-    ).toBeInTheDocument();
-    expect(screen.getByTestId(defaultTestIds.submitButton)).toBeInTheDocument();
+    expect(screen.getByTestId(testId)).toBeInTheDocument();
+    expect(screen.getByTestId(`${testId}-email-input`)).toBeInTheDocument();
+    expect(screen.getByTestId(`${testId}-password-input`)).toBeInTheDocument();
+    expect(screen.getByTestId(`${testId}-submit-button`)).toBeInTheDocument();
   });
 
   it("displays external error message when provided", () => {
     const errorMessage = "Invalid credentials";
-    render(<LoginForm onSubmit={mockOnSubmit} externalError={errorMessage} />);
+    render(
+      <LoginForm
+        onSubmit={mockOnSubmit}
+        externalError={errorMessage}
+        testId={testId}
+      />,
+    );
 
-    expect(screen.getByTestId(defaultTestIds.externalError)).toHaveTextContent(
+    expect(screen.getByTestId(`${testId}-external-error`)).toHaveTextContent(
       errorMessage,
     );
   });
 
   it("validates email format and shows error message", async () => {
-    render(<LoginForm onSubmit={mockOnSubmit} />);
+    render(<LoginForm onSubmit={mockOnSubmit} testId={testId} />);
 
-    const emailInput = screen.getByTestId(defaultTestIds.emailInput);
+    const emailInput = screen.getByTestId(`${testId}-email-input`);
 
     await act(async () => {
       fireEvent.change(emailInput, { target: { value: "invalid-email" } });
@@ -54,16 +50,16 @@ describe("LoginForm", () => {
     });
 
     await waitFor(() => {
-      expect(screen.getByTestId(defaultTestIds.emailError)).toHaveTextContent(
+      expect(screen.getByTestId(`${testId}-email-error`)).toHaveTextContent(
         /email/i,
       );
     });
   });
 
   it("validates password and shows error message", async () => {
-    render(<LoginForm onSubmit={mockOnSubmit} />);
+    render(<LoginForm onSubmit={mockOnSubmit} testId={testId} />);
 
-    const passwordInput = screen.getByTestId(defaultTestIds.passwordInput);
+    const passwordInput = screen.getByTestId(`${testId}-password-input`);
 
     await act(async () => {
       fireEvent.change(passwordInput, { target: { value: "123" } });
@@ -71,18 +67,18 @@ describe("LoginForm", () => {
     });
 
     await waitFor(() => {
-      expect(
-        screen.getByTestId(defaultTestIds.passwordError),
-      ).toHaveTextContent(/password/i);
+      expect(screen.getByTestId(`${testId}-password-error`)).toHaveTextContent(
+        /password/i,
+      );
     });
   });
 
   it("submits form with valid data", async () => {
-    render(<LoginForm onSubmit={mockOnSubmit} />);
+    render(<LoginForm onSubmit={mockOnSubmit} testId={testId} />);
 
-    const emailInput = screen.getByTestId(defaultTestIds.emailInput);
-    const passwordInput = screen.getByTestId(defaultTestIds.passwordInput);
-    const submitButton = screen.getByTestId(defaultTestIds.submitButton);
+    const emailInput = screen.getByTestId(`${testId}-email-input`);
+    const passwordInput = screen.getByTestId(`${testId}-password-input`);
+    const submitButton = screen.getByTestId(`${testId}-submit-button`);
 
     await act(async () => {
       fireEvent.change(emailInput, { target: { value: "test@example.com" } });
@@ -106,11 +102,11 @@ describe("LoginForm", () => {
 
     mockOnSubmit.mockImplementation(() => submitPromise);
 
-    render(<LoginForm onSubmit={mockOnSubmit} />);
+    render(<LoginForm onSubmit={mockOnSubmit} testId={testId} />);
 
-    const emailInput = screen.getByTestId(defaultTestIds.emailInput);
-    const passwordInput = screen.getByTestId(defaultTestIds.passwordInput);
-    const submitButton = screen.getByTestId(defaultTestIds.submitButton);
+    const emailInput = screen.getByTestId(`${testId}-email-input`);
+    const passwordInput = screen.getByTestId(`${testId}-password-input`);
+    const submitButton = screen.getByTestId(`${testId}-submit-button`);
 
     await act(async () => {
       fireEvent.change(emailInput, { target: { value: "test@example.com" } });
@@ -132,28 +128,22 @@ describe("LoginForm", () => {
   });
 
   it("uses custom testIds when provided", () => {
-    const customTestIds = {
-      form: "custom-form",
-      emailInput: "custom-email",
-      emailError: "custom-email-error",
-      passwordInput: "custom-password",
-      passwordError: "custom-password-error",
-      submitButton: "custom-submit",
-      externalError: "custom-external-error",
-    };
-
     render(
       <LoginForm
         onSubmit={mockOnSubmit}
         externalError="Test error"
-        testIds={customTestIds}
+        testId={"custom-form"}
       />,
     );
 
-    expect(screen.getByTestId(customTestIds.form)).toBeInTheDocument();
-    expect(screen.getByTestId(customTestIds.emailInput)).toBeInTheDocument();
-    expect(screen.getByTestId(customTestIds.passwordInput)).toBeInTheDocument();
-    expect(screen.getByTestId(customTestIds.submitButton)).toBeInTheDocument();
-    expect(screen.getByTestId(customTestIds.externalError)).toBeInTheDocument();
+    expect(screen.getByTestId("custom-form")).toBeInTheDocument();
+    expect(screen.getByTestId("custom-form-email-input")).toBeInTheDocument();
+    expect(
+      screen.getByTestId("custom-form-password-input"),
+    ).toBeInTheDocument();
+    expect(screen.getByTestId("custom-form-submit-button")).toBeInTheDocument();
+    expect(
+      screen.getByTestId("custom-form-external-error"),
+    ).toBeInTheDocument();
   });
 });

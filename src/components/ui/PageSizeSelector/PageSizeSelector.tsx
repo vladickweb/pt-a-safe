@@ -18,7 +18,7 @@ export const PageSizeSelector = ({
         value={pageSize}
         onChange={(e) => setPageSize(Number(e.target.value))}
         className="border rounded-md px-2 py-1"
-        data-testid={testId ? `${testId}-select` : undefined}
+        data-testid={`${testId}-select`}
       >
         {options.map((size) => (
           <option key={size} value={size}>

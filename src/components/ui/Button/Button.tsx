@@ -89,9 +89,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           <div
             className="mr-2 h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent"
             aria-hidden="true"
-            data-testid={
-              dataTestId ? `${dataTestId}-loading-spinner` : undefined
-            }
+            data-testid={`${dataTestId}-loading-spinner`}
           />
         )}
         {children}

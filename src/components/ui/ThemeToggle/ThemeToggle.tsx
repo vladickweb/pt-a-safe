@@ -21,15 +21,9 @@ export function ThemeToggle({ testId }: ThemeToggleProps) {
       data-testid={testId}
     >
       {isDarkMode ? (
-        <Sun
-          className="h-5 w-5"
-          data-testid={testId ? `${testId}-sun` : undefined}
-        />
+        <Sun className="h-5 w-5" data-testid={`${testId}-sun`} />
       ) : (
-        <Moon
-          className="h-5 w-5"
-          data-testid={testId ? `${testId}-moon` : undefined}
-        />
+        <Moon className="h-5 w-5" data-testid={`${testId}-moon`} />
       )}
     </Button>
   );

@@ -7,32 +7,14 @@ import { Button } from "@/components/ui/Button/Button";
 interface LoginFormProps {
   onSubmit: (values: { email: string; password: string }) => Promise<void>;
   externalError?: string;
-  testIds?: {
-    form?: string;
-    emailInput?: string;
-    emailError?: string;
-    passwordInput?: string;
-    passwordError?: string;
-    submitButton?: string;
-    externalError?: string;
-  };
+  testId?: string;
 }
 
 export const LoginForm = ({
   onSubmit,
   externalError,
-  testIds = {},
+  testId,
 }: LoginFormProps) => {
-  const {
-    form = "login-form",
-    emailInput = "email-input",
-    emailError = "email-error",
-    passwordInput = "password-input",
-    passwordError = "password-error",
-    submitButton = "submit-button",
-    externalError: externalErrorTestId = "external-error",
-  } = testIds;
-
   return (
     <Formik
       initialValues={{ email: "", password: "" }}
@@ -43,11 +25,11 @@ export const LoginForm = ({
       }}
     >
       {({ isSubmitting }) => (
-        <Form className="flex flex-col gap-4 p-8 rounded" data-testid={form}>
+        <Form className="flex flex-col gap-4 p-8 rounded" data-testid={testId}>
           {externalError && (
             <div
               className="text-red-500 text-sm mb-2"
-              data-testid={externalErrorTestId}
+              data-testid={`${testId}-external-error`}
             >
               {externalError}
             </div>
@@ -60,13 +42,13 @@ export const LoginForm = ({
               type="email"
               placeholder="Email"
               className="border p-2 rounded"
-              data-testid={emailInput}
+              data-testid={`${testId}-email-input`}
             />
             <ErrorMessage
               name="email"
               component="div"
               className="text-red-500 text-sm mt-1"
-              data-testid={emailError}
+              data-testid={`${testId}-email-error`}
             />
           </div>
 
@@ -77,20 +59,20 @@ export const LoginForm = ({
               type="password"
               placeholder="Password"
               className="border p-2 rounded"
-              data-testid={passwordInput}
+              data-testid={`${testId}-password-input`}
             />
             <ErrorMessage
               name="password"
               component="div"
               className="text-red-500 text-sm mt-1"
-              data-testid={passwordError}
+              data-testid={`${testId}-password-error`}
             />
           </div>
 
           <Button
             type="submit"
             isLoading={isSubmitting}
-            data-testid={submitButton}
+            data-testid={`${testId}-submit-button`}
           >
             Login
           </Button>

@@ -18,21 +18,16 @@ export function SummaryCard({
 }: SummaryCardProps) {
   return (
     <Card testId={testId}>
-      <CardHeader testId={testId ? `${testId}-header` : undefined}>
-        <CardTitle testId={testId ? `${testId}-title` : undefined}>
-          {title}
-        </CardTitle>
+      <CardHeader testId={`${testId}-header`}>
+        <CardTitle testId={`${testId}-title`}>{title}</CardTitle>
       </CardHeader>
-      <CardContent testId={testId ? `${testId}-content` : undefined}>
-        <div
-          className="text-2xl font-bold"
-          data-testid={testId ? `${testId}-value` : undefined}
-        >
+      <CardContent testId={`${testId}-content`}>
+        <div className="text-2xl font-bold" data-testid={`${testId}-value`}>
           {isCurrency ? `$${value}` : value}
         </div>
         <div
           className={`text-sm ${getChangeColor(change)}`}
-          data-testid={testId ? `${testId}-change` : undefined}
+          data-testid={`${testId}-change`}
         >
           {formatChangeValue(change)}
         </div>

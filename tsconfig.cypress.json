@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "isolatedModules": false,
+    "types": ["cypress", "node"],
+    "baseUrl": "../",
+    "paths": {
+      "@/*": ["src/*"]
+    }
+  },
+  "include": ["./**/*.ts", "cypress/**/*.tsx", "cypress/**/*.cy.ts", "cypress/support/**/*.ts"]
+}
