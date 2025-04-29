@@ -1,6 +1,5 @@
 import { useCallback } from "react";
 import { useQueryClient } from "@tanstack/react-query";
-import { fetchPaginatedData } from "@/lib/api";
 
 export function usePagination(
   page: number,
@@ -13,10 +12,7 @@ export function usePagination(
   const handlePageChange = useCallback(
     (newPage: number) => {
       if (newPage < 1 || newPage > totalPages) return;
-      queryClient.prefetchQuery({
-        queryKey: ["users", newPage, pageSize],
-        queryFn: () => fetchPaginatedData(newPage, pageSize),
-      });
+      queryClient.prefetchQuery({ queryKey: ["users", newPage, pageSize] });
       setPage(newPage);
     },
     [queryClient, pageSize, setPage, totalPages],

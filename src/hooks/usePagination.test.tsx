@@ -4,10 +4,6 @@ import { renderHook, act } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { usePagination } from "./usePagination";
 
-jest.mock("@/lib/api", () => ({
-  fetchPaginatedData: jest.fn(() => Promise.resolve({ data: [], total: 0 })),
-}));
-
 const createWrapper = () => {
   const queryClient = new QueryClient();
   const Wrapper = ({ children }: { children: React.ReactNode }) => (

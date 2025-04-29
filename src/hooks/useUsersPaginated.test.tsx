@@ -2,25 +2,27 @@ import React from "react";
 import "@testing-library/jest-dom";
 import { renderHook, waitFor } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { usePaginatedData } from "./usePaginatedData";
+import { useUsersPaginated } from "./useUsersPaginated";
 
-jest.mock("@/lib/api", () => ({
-  fetchPaginatedData: jest.fn(() =>
-    Promise.resolve({
-      data: [
-        {
-          id: "1",
-          name: "John Doe",
-          email: "john@example.com",
-          company: "Company A",
-          status: "active",
-          lastLogin: new Date(),
-        },
-      ],
-      total: 1,
-    }),
-  ),
-}));
+global.fetch = jest.fn(() =>
+  Promise.resolve({
+    ok: true,
+    json: () =>
+      Promise.resolve({
+        data: [
+          {
+            id: "1",
+            name: "John Doe",
+            email: "john@example.com",
+            company: "Company A",
+            status: "active",
+            lastLogin: new Date(),
+          },
+        ],
+        total: 1,
+      }),
+  }),
+) as jest.Mock;
 
 const createWrapper = () => {
   const queryClient = new QueryClient();
@@ -33,7 +35,7 @@ const createWrapper = () => {
 
 describe("usePaginatedData", () => {
   it("fetches paginated data successfully", async () => {
-    const { result } = renderHook(() => usePaginatedData(1, 10), {
+    const { result } = renderHook(() => useUsersPaginated(1, 10), {
       wrapper: createWrapper(),
     });
 

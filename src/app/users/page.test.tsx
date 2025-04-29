@@ -1,7 +1,7 @@
 import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
 import UsersPage from "./page";
-import { usePaginatedData } from "@/hooks/usePaginatedData";
+import { useUsersPaginated } from "@/hooks/useUsersPaginated";
 
 interface Column {
   key: string;
@@ -17,8 +17,8 @@ interface User {
   lastLogin: string;
 }
 
-jest.mock("@/hooks/usePaginatedData", () => ({
-  usePaginatedData: jest.fn(),
+jest.mock("@/hooks/useUsersPaginated", () => ({
+  useUsersPaginated: jest.fn(),
 }));
 
 jest.mock("@/components/layout/PageLayout", () => ({
@@ -68,7 +68,7 @@ jest.mock("@/components/ui/PageSizeSelector/PageSizeSelector", () => ({
 
 describe("UsersPage", () => {
   beforeEach(() => {
-    (usePaginatedData as jest.Mock).mockReturnValue({
+    (useUsersPaginated as jest.Mock).mockReturnValue({
       data: {
         data: [
           {
@@ -104,7 +104,7 @@ describe("UsersPage", () => {
   });
 
   it("renders skeletons when loading", () => {
-    (usePaginatedData as jest.Mock).mockReturnValueOnce({
+    (useUsersPaginated as jest.Mock).mockReturnValueOnce({
       data: null,
       isLoading: true,
     });

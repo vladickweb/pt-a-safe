@@ -1,7 +1,7 @@
 "use client";
 
 import { PageLayout } from "@/components/layout/PageLayout";
-import { usePaginatedData } from "@/hooks/usePaginatedData";
+import { useUsersPaginated } from "@/hooks/useUsersPaginated";
 import { Pagination } from "@/components/ui/Pagination/Pagination";
 import { Table } from "@/components/ui/Table/Table";
 import { UserTableRow } from "@/components/users/UserTableRow";
@@ -22,7 +22,7 @@ export default function UsersPage() {
   const [pageSize, setPageSize] = useState(10);
   const [total, setTotal] = useState(0);
 
-  const { data, isLoading } = usePaginatedData(page, pageSize);
+  const { data, isLoading } = useUsersPaginated(page, pageSize);
   const users = data?.data ?? [];
 
   useEffect(() => {

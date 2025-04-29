@@ -1,23 +1,9 @@
+import { NextRequest, NextResponse } from "next/server";
 import { faker } from "@faker-js/faker";
-
-interface User {
-  id: string;
-  name: string;
-  email: string;
-  phone: string;
-  company: string;
-  status: "active" | "inactive";
-  lastLogin: Date;
-}
-
-interface PaginatedData {
-  data: User[];
-  total: number;
-}
 
 const TOTAL_RECORDS = 1000;
 
-const generateMockUsers = (count: number): User[] => {
+const generateMockUsers = (count: number) => {
   return Array.from({ length: count }, () => ({
     id: faker.string.uuid(),
     name: faker.person.fullName(),
@@ -31,18 +17,19 @@ const generateMockUsers = (count: number): User[] => {
 
 const mockUsers = generateMockUsers(TOTAL_RECORDS);
 
-export const fetchPaginatedData = async (
-  page: number,
-  pageSize: number,
-): Promise<PaginatedData> => {
+export async function GET(req: NextRequest) {
+  const { searchParams } = new URL(req.url);
+  const page = parseInt(searchParams.get("page") || "1", 10);
+  const pageSize = parseInt(searchParams.get("pageSize") || "10", 10);
+
   await new Promise((resolve) => setTimeout(resolve, 500));
 
   const start = (page - 1) * pageSize;
   const end = start + pageSize;
   const paginatedData = mockUsers.slice(start, end);
 
-  return {
+  return NextResponse.json({
     data: paginatedData,
     total: TOTAL_RECORDS,
-  };
-};
+  });
+}
