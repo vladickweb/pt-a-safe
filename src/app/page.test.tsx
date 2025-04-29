@@ -7,18 +7,14 @@ jest.mock("next/navigation", () => ({
   useRouter: jest.fn(),
 }));
 
-jest.mock("@/components/ui/Button/Button", () => ({
-  Button: ({
-    onClick,
-    children,
-  }: {
-    onClick: () => void;
-    children: React.ReactNode;
-  }) => (
-    <button onClick={onClick} data-testid="go-to-login-button">
-      {children}
-    </button>
+jest.mock("@/contexts/ThemeContext", () => ({
+  ThemeProvider: ({ children }: { children: React.ReactNode }) => (
+    <div>{children}</div>
   ),
+  useTheme: () => ({
+    isDarkMode: false,
+    toggleTheme: jest.fn(),
+  }),
 }));
 
 describe("Home", () => {

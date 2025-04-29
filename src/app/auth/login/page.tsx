@@ -1,6 +1,7 @@
 "use client";
 
 import { LoginForm } from "@/components/forms/LoginForm";
+import { ThemeToggle } from "@/components/ui/ThemeToggle/ThemeToggle";
 import { useLogin } from "@/hooks/useLogin";
 
 interface LoginPageProps {

@@ -7,6 +7,10 @@ import {
 } from "@testing-library/react";
 import { LoginForm } from "./index";
 
+jest.mock("next/navigation", () => ({
+  useRouter: jest.fn(),
+}));
+
 describe("LoginForm", () => {
   const mockOnSubmit = jest.fn();
   const testId = "login-form";
